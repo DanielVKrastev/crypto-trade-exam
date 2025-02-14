@@ -26,7 +26,7 @@ app.engine('hbs', handlebars.engine({
 // Setup DB mongoose
 try{
     const uri = 'mongodb://127.0.0.1/';
-    await mongoose.connect(uri, { dbName: 'home-cooking-recipes' });
+    await mongoose.connect(uri, { dbName: 'crypto-trade' });
 
     console.log('Success DB connect');
 }catch(err){
