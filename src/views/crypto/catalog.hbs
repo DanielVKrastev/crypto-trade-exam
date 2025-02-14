@@ -1,0 +1,28 @@
+{{setTitleOnPage 'Crypto catalog'}}
+<section class="crypto-market">
+    <h1><span>Crypto</span> Trade</h1>
+    {{#if crypto}}
+    <div class="offer-list">
+        {{#each crypto}}
+        <div class="coin">
+            <div class="coin-img">
+                <img src="{{image}}">
+            </div>
+            <div class="coin-info">
+                <h1>{{name}}</h1>
+                <p><span>Price: </span>${{price}}</p>
+                <p><span>Payment: </span>{{paymentMethod}}</p>
+            </div>
+
+            <a href="/crypto/{{id}}/details" class="btn-details">Details</a>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+
+    {{#unless crypto}}
+    <div class="no-offer">
+        <p>There are no crypto offers found!</p>
+    </div>
+    {{/unless}}
+</section>

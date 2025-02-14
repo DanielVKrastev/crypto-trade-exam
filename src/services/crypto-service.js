@@ -13,8 +13,8 @@ export default {
     async update(cryptoId, updateData){
         return await Crypto.findByIdAndUpdate(cryptoId, updateData, { runValidators: true });
     },
-    create(cryptoData, userId){
-        return Crypto.create({ ...cryptoData, owner: userId })
+    async create(cryptoData, userId){
+        return await Crypto.create({ ...cryptoData, owner: userId })
     },
     async del(cryptoId){
         return await Crypto.findByIdAndDelete(cryptoId);
