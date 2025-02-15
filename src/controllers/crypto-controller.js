@@ -36,13 +36,13 @@ cryptoController.get('/:cryptoId/details', async (req, res) => {
 
         const isOwner = req.user && req.user.id == crypto.owner;
         const sold = crypto.buyCrypto.includes(req.user?.id);
+        
         res.render('crypto/details', { crypto, user: req.user.id, isOwner, sold });
     }catch(err){
         const error = getErrorMessage(err);
         res.render('crypto/catalog', { error });
     }
 
-    res.render('crypto/details', { crypto });
 });
 
 cryptoController.get('/:cryptoId/delete', isAuth, isOwner, async (req, res) => {
@@ -75,6 +75,19 @@ cryptoController.post('/:cryptoId/edit', isAuth, isOwner, async (req, res) => {
         const error = (getErrorMessage(err));
         res.render(`crypto/edit`, { crypto: cryptoNewData, error });
     }
+});
+
+cryptoController.get('/:cryptoId/buy', isAuth, async (req, res) => {
+    const cryptoId = req.params.cryptoId;
+    const userId = req.user.id;
+
+    try{
+        await cryptoService.buyCrypto(cryptoId, userId);
+    }catch(err){
+        res.setError(getErrorMessage(err));
+    }
+
+    res.redirect(`/crypto/${cryptoId}/details`);
 });
 
 export default cryptoController;

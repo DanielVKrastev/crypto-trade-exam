@@ -24,8 +24,9 @@
 
                 {{#if sold}}
                 <p class="buy-message">You already bought these crypto coins.</p>
+                {{else}}
+                <a href="/crypto/{{crypto.id}}/buy" class="btn-buy">Buy</a>
                 {{/if}}
-                <a href="#" class="btn-buy">Buy</a>
             {{/if}}
 
             {{/if}}
