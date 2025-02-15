@@ -9,14 +9,17 @@ const cryptoSchema = new Schema({
     image: {
         type: String,
         required: true,
+        match: /^https?:\/\//,
     },
     price: {
         type: Number,
         required: true,
+        min: 0,
     },
     description: {
         type: String,
         required: true,
+        minLength: 10,
     },
     paymentMethod: {
         type: String,
