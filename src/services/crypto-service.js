@@ -4,6 +4,11 @@ export default {
     getAll(filter = {}){
         let query = Crypto.find({});
 
+        if(filter.name){
+            query = Crypto.find({ name: { $regex: new RegExp(filter.name, 'i') },
+                                    paymentMethod: filter.paymentMethod });
+        }
+
         return query;
     },
     async getOne(cryptoId){

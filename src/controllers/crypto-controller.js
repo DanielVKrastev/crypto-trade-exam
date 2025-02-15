@@ -90,4 +90,25 @@ cryptoController.get('/:cryptoId/buy', isAuth, async (req, res) => {
     res.redirect(`/crypto/${cryptoId}/details`);
 });
 
+cryptoController.get('/search', async (req, res) => {
+    const crypto = await cryptoService.getAll();
+
+    res.render('crypto/search', { crypto });
+});
+
+cryptoController.post('/search', async (req, res) => {
+    const searchCrypto = req.body;
+    const name = searchCrypto.name.trim().toLowerCase();
+    const paymentMethod = searchCrypto.paymentMethod;
+    
+    try{
+        const searchMatch = await cryptoService.getAll({ name, paymentMethod });
+        res.render('crypto/search', { crypto: searchMatch });
+    }catch(err){
+        const error = getErrorMessage(err);
+        res.render('crypto/search', { crypto: [] , error });
+    }
+});
+
+
 export default cryptoController;
